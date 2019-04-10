@@ -1,0 +1,138 @@
+﻿<Window x:Class="lagerking.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lagerking"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="586.633" Width="891.5" Background="#FFFDFD00">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Name="mainMenu">
+                <MenuItem Header="_File" >
+                    <MenuItem Header="_New"/>
+                    <MenuItem Header="_Open"/>
+                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="Save _As"/>
+                    <MenuItem Header="_Exit"/>
+                </MenuItem>
+                <MenuItem Header="_Medarbejder">
+                    <MenuItem Header="_Anvend"/>
+                </MenuItem>
+            </Menu>
+
+            <ToolBar DockPanel.Dock="Top" Height="auto"
+                 FontSize="20" FontWeight="Bold"
+                 Background="AliceBlue">
+
+                <Button>
+                    <StackPanel>
+                        <Image Source="Images/tilfoj.png" />
+                    </StackPanel>
+                </Button>
+
+                <Button>
+                    <StackPanel>
+                        <Image Source="Images/trash.png" />
+                    </StackPanel>
+                </Button>
+
+                <Button>
+                    <StackPanel>
+                        <Image Source="Images/left.png" />
+                    </StackPanel>
+                </Button>
+
+                <Button>
+                    <StackPanel>
+                        <Image Source="Images/right.png" />
+                    </StackPanel>
+                </Button>
+
+
+                <Separator Width="10" Margin="0"/>
+
+                <Label Content="Sorter elementer:"
+                   VerticalAlignment="Center" 
+                   Margin="2,0,2,0" 
+                   FontSize="12"
+                   />
+                <ComboBox Width="100" x:Name="sortOrderCombo" SelectedIndex="0"
+                      FontSize="12"
+                      >
+                    <ComboBoxItem Tag="Navn">Navn</ComboBoxItem>
+                    <ComboBoxItem Tag="Antal">Antal</ComboBoxItem>
+                    <ComboBoxItem Tag="Status">Status</ComboBoxItem>
+                    <ComboBoxItem Tag="Pris">Pris</ComboBoxItem>
+                </ComboBox>
+
+            </ToolBar>
+
+            <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Background="AliceBlue">
+                <StatusBarItem Name="sbiDateTime" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal" Name="spClock">
+                        <TextBlock Margin="4,0" Name="tblkDate" />
+                        <TextBlock Margin="4,0" Name="tblkTime"  />
+                    </StackPanel>
+                </StatusBarItem>
+            </StatusBar>
+
+            <Grid Name="lagergrid" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="76*"></ColumnDefinition>
+                    <ColumnDefinition Width="19*"/>
+                    <ColumnDefinition Width="202*"/>
+                    <ColumnDefinition Width="67"></ColumnDefinition>
+                    <ColumnDefinition Width="520*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Height="28" Margin="0,8,0,0" Name="label1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="63" FontSize="14" FontWeight="Bold" >_Navn:</Label>
+                <Label Height="28" Margin="0,38,0,0" Name="label2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="43" FontSize="14" FontWeight="Bold" >_Pris:</Label>
+                <Label Height="28" Margin="0,100,0,0" Name="label4" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"  FontSize="14" FontWeight="Bold" Content="Afdeling:" Grid.ColumnSpan="2" />
+                <Label Height="28" Margin="0,68,0,0" x:Name="label3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="63" FontSize="14" FontWeight="Bold" >_Antal:</Label>
+
+                <TextBox Margin="2,8,14,0" 
+                     Name="tbxId"
+                     VerticalAlignment="Top" 
+                     Text="{Binding Path=NAVN}"                   
+                     Grid.Column="2" Height="25"
+                     />
+                <TextBox Margin="2,38,14,0" 
+                     Name="textBox2" 
+                     VerticalAlignment="Top" 
+                     Text="{Binding Path=PRIS}" 
+                      Grid.Column="2" Height="25"
+                     />
+
+                <TextBox Margin="2,68,14,0" 
+                     Name="textBox3" 
+                     VerticalAlignment="Top" 
+                     Text="{Binding Path=ANTAL}" 
+                     Grid.Column="2" Height="25"
+                     />
+
+                <ComboBox Margin="2,105,14,0" 
+                      VerticalAlignment="Top" 
+                      SelectedItem="{Binding Path=AFDELING}" 
+                       Grid.Column="2" Height="22" 
+                      />
+
+
+
+
+                <GridSplitter Grid.Column="3"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Stretch"
+                          Width="6" Margin="25,0,36,0"
+                          />
+                <ListBox 
+                     IsSynchronizedWithCurrentItem="True"
+                     SelectedIndex="{Binding Path=CurrentIndex}"
+                     SelectedItem="{Binding Path=CurrentOps}"
+                     Name="lbxOps" 
+                     Grid.Column="4" 
+                     Margin="9"  />
+            </Grid>
+
+        </DockPanel>
+    </Grid>
+</Window>
